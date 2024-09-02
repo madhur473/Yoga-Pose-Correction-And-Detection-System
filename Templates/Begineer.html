@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner Yoga Poses</title>
+    <link rel="stylesheet" href="https://cdn.tailwindcss.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #d8e7e4;
+            color: #000;
+        }
+
+        .header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s;
+        }
+
+        .header a:hover {
+            color: #b2dfdb;
+        }
+
+        .main-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .pose-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
+            gap: 20px;
+            justify-content: center; /* Center items horizontally */
+        }
+
+        .pose {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 300px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pose img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .pose h2 {
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .pose p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            background-color: #004d40;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #003d33;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Beginner Yoga Poses</h1>
+        <a href="index.html">Home</a>
+    </header>
+
+    <div class="main-content">
+        <div class="pose-container">
+            <!-- Pose 1 -->
+            <div class="pose">
+                <img src="/static/images/Mountain-pose.jpeg" alt="Pose 1">
+                <h2>Mountain Pose (Tadasana)</h2>
+                <p>This fundamental pose improves posture and balance. Stand with your feet together, arms at your sides, and weight evenly distributed on both feet. Engage your thighs and lift your chest. Hold for 30 seconds to 1 minute.</p>
+            </div>
+
+            <!-- Pose 2 -->
+            <div class="pose">
+                <img src="/static/images/ADHO MUKHA.png" alt="Pose 2">
+                <h2>Downward Dog (Adho Mukha Svanasana)</h2>
+                <p>A great pose for stretching and strengthening the entire body. Start on your hands and knees, lift your hips towards the ceiling, and straighten your legs. Keep your hands shoulder-width apart and feet hip-width apart. Hold for 30 seconds to 1 minute.</p>
+            </div>
+
+            <!-- Pose 3 -->
+            <div class="pose">
+                <img src="/static/images/ChildPose.png" alt="Pose 3">
+                <h2>Child's Pose (Balasana)</h2>
+                <p>This restful pose helps to relax and stretch the back and hips. Kneel on the floor, sit back on your heels, and stretch your arms forward on the mat. Rest your forehead on the ground and hold for 1 to 3 minutes.</p>
+            </div>
+        </div>
+        <a href="index.html" class="back-button">Back to Home</a>
+    </div>
+</body>
+
+</html>

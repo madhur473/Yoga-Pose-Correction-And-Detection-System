@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+     body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      background-image: url(static/images/background.jpg);
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .login-box {
+      background-color: #8288A6;
+      padding: 80px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      margin: 20px;
+    }
+    .login-box h1 {
+      font-family: 'cmmi10', serif;
+      margin: 4px;
+      font-size: 48px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .password-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .password-icon {
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="login-box">
+      <h1>Login</h1>
+      <form id="login-form" method="POST">
+        <div style="margin-bottom: 20px;">
+          <input type="email" placeholder="Email" id="email" required name="email">
+        </div>
+        <div class="password-container">
+          <input type="password" placeholder="Password" id="password" required name="pass">
+          <span class="password-icon" id="togglePassword">&#128065;</span>
+        </div>
+        <div style="text-align: center;">
+          <button type="submit" value="signup">Login</button>
+        </div>
+        <div style="margin-top: 10px;">
+          <!-- Display error message here -->
+          {% if error %}
+            <p style="color: red;">{{ error }}</p>
+          {% endif %}
+          If you are not a member, <a href="signup.html">signup</a>
+        </div>
+      </form>      
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("togglePassword").addEventListener("click", function() {
+      var passwordInput = document.getElementById("password");
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        document.getElementById("togglePassword").innerHTML = "&#128064;"; // Show password icon
+      } else {
+        passwordInput.type = "password";
+        document.getElementById("togglePassword").innerHTML = "&#128065;"; // Hide password icon
+      }
+    });
+
+    document.getElementById("login-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+
+      // Send a POST request to the /login route with email and password data
+      fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          'email': email,  // Use 'username' for email field in the form
+          'password': password
+        })
+      })
+      .then(response => {
+        if (response.redirected) {
+          // Redirect to the dashboard or profile page upon successful login
+          window.location.href = '/'; 
+        } else {
+          // Display error message if login fails
+          return response.text().then(text => {
+            document.getElementById("error").innerText = text;
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    });
+  </script>
+</body>
+</html>
