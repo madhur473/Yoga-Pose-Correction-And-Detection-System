@@ -34,6 +34,30 @@ def contactUs():
 def begineer():
     return render_template('Begineer.html')
 
+@app.route('/intermediate.html')
+def intermediate():
+    return render_template('intermediate.html')
+
+@app.route('/pro.html')
+def pro():
+    return render_template('pro.html')
+
+@app.route('/trainers.html')
+def trainers():
+    return render_template('trainers.html')
+
+@app.route('/trainer-details/trainer1.html')
+def trainer1():
+    return render_template('trainer-details/trainer1.html')
+
+@app.route('/trainer-details/trainer2.html')
+def trainer2():
+    return render_template('/trainer-details/trainer2.html')
+
+@app.route('/trainer-details/trainer3.html')
+def trainer3():
+    return render_template('/trainer-details/trainer3.html')
+
 @app.route('/login', methods=['POST'])
 def login_user():
     if request.method == 'POST':

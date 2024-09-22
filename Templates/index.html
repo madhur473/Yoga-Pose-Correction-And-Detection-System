@@ -1,222 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Yoga Pose Correction And Detection</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #d8e7e4;
-            color: #fff;
-        }
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #d8e7e4;
+        color: #fff;
+      }
 
-        .custom-header {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
+      /* Navbar Styling */
+      .custom-header {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      }
 
-        .logo img {
-            max-width: 100%;
-            height: auto;
-        }
+      .logo img {
+        max-width: 100%;
+        height: auto;
+      }
 
-        .info-box {
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            background-color: rgba(0, 0, 0, 0.7);
-            margin: 120px auto 20px;
-            max-width: 80%;
-            width: 500px;
-        }
+      .custom-header .nav-links {
+        display: flex;
+        gap: 1rem;
+      }
 
-        .video-container video {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
+      .custom-header a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        transition: color 0.3s;
+      }
 
-        .main-content {
-            padding-top: 120px; /* Adjust for fixed header */
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.8);
-            color: #000;
-            min-height: 100vh; /* Ensure the main content takes full viewport height */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
+      .custom-header a:hover {
+        color: #b2dfdb;
+      }
 
-        .custom-header .nav-links {
-            display: flex;
-            gap: 1rem;
-        }
+      .sign-in-btn {
+        background-color: #004d40;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        font-size: 1rem;
+        cursor: pointer;
+        border: none;
+        transition: background-color 0.3s;
+      }
 
-        .custom-header a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s;
-        }
+      .sign-in-btn:hover {
+        background-color: #003d33;
+      }
 
-        .custom-header a:hover {
-            color: #b2dfdb;
-        }
+      .main-content {
+        padding-top: 120px; /* Adjust for fixed header */
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #000;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
 
-        .sign-in-btn {
-            background-color: #004d40;
-            color: #fff;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            font-size: 1rem;
-            cursor: pointer;
-            border: none;
-            transition: background-color 0.3s;
-        }
+      .circle-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 130px;
+      }
 
-        .sign-in-btn:hover {
-            background-color: #003d33;
-        }
+      .circle {
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: #fff;
+        text-decoration: none;
+        transition: background-color 0.3s, transform 0.3s;
+        font-weight: bold;
+      }
 
-        /* Styles for the circles */
-        .circle-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 130px;
-        }
+      .circle:hover {
+        background-color: #003d33;
+        transform: scale(1.1);
+      }
 
-        .circle {
-            width: 260px;
-            height: 260px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: #fff;
-            text-decoration: none;
-            transition: background-color 0.3s, transform 0.3s;
-            font-weight: bold;
-        }
+      .circle.beginner {
+        background-color: #009688;
+      }
 
-        .circle:hover {
-            background-color: #003d33;
-            transform: scale(1.1);
-        }
+      .circle.intermediate {
+        background-color: #00796b;
+      }
 
-        .circle.beginner {
-            background-color: #009688;
-        }
+      .circle.pro {
+        background-color: #004d40;
+      }
 
-        .circle.intermediate {
-            background-color: #00796b;
-        }
+      /* Swiper styles */
+      .swiper-container {
+        width: 100%;
+        height: 300px; /* Adjust height as needed */
+        margin-top: 140px; /* Adds space between navbar and slides */
+      }
 
-        .circle.pro {
-            background-color: #004d40;
-        }
+      .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fff;
+        color: #000;
+        font-size: 1.5rem;
+        text-align: center;
+      }
 
-        /* Swiper styles */
-        .swiper-container {
-            width: 100%;
-            height: 300px; /* Adjust height as needed */
-            margin-top: 140px; /* Adds space between navbar and slides */
-        }
+      /* Video Tutorial Section */
+      .video-tutorials {
+        margin-top: 40px;
+      }
 
-        .swiper-slide {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #fff;
-            color: #000;
-            font-size: 1.5rem;
-            text-align: center;
-        }
+      .video-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .video-container iframe,
+      .video-container video {
+        width: 320px;
+        height: 180px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <!-- Navbar -->
     <header class="custom-header">
-        <div class="logo flex items-center">
-            <img src="/static/images/logo.png" alt="Logo" class="w-24 h-24"/>
-        </div>
-        <nav class="nav-links flex space-x-4">
-            <a href="index.html">Home</a>
-            <a href="#">Poses</a>
-            <a href="Analyze.html">Analyze</a>
-            <a href="#">Trainers</a>
-            <a href="#">Resources</a>
-            <a href="contactUs.html">Contact Us</a>
-        </nav>
-        <a href="login.html">
-            <button class="sign-in-btn">Sign in</button>
-        </a>
+      <div class="logo flex items-center">
+        <img src="/static/images/logo.png" alt="Logo" class="w-24 h-24" />
+      </div>
+      <nav class="nav-links flex space-x-4">
+        <a href="index.html">Home</a>
+        <a href="#">Poses</a>
+        <a href="Analyze.html">Analyze</a>
+        <a href="trainers.html">Trainers</a>
+        <a href="#">Resources</a>
+        <a href="contactUs.html">Contact Us</a>
+      </nav>
+      <a href="login.html">
+        <button class="sign-in-btn">Sign in</button>
+      </a>
     </header>
 
     <!-- Swiper Carousel -->
     <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">Slide 1 Content</div>
-            <div class="swiper-slide">Slide 2 Content</div>
-            <div class="swiper-slide">Slide 3 Content</div>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-        <!-- Add Navigation -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">Slide 1 Content</div>
+        <div class="swiper-slide">Slide 2 Content</div>
+        <div class="swiper-slide">Slide 3 Content</div>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add Navigation -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
     </div>
 
+    <!-- Main Content -->
     <div class="main-content">
-        <div class="circle-container">
-            <a href="Begineer.html" class="circle beginner">Beginner</a>
-            <a href="intermediate.html" class="circle intermediate">Intermediate</a>
-            <a href="pro.html" class="circle pro">Pro</a>
+      <!-- Yoga Pose Levels -->
+      <div class="circle-container">
+        <a href="Begineer.html" class="circle beginner">Beginner</a>
+        <a href="intermediate.html" class="circle intermediate">Intermediate</a>
+        <a href="pro.html" class="circle pro">Pro</a>
+      </div>
+
+      <!-- Video Tutorials Section -->
+      <div class="video-tutorials">
+        <h2><b>Yoga Pose Tutorials</b></h2>
+        <div class="video-container">
+          <!-- Example YouTube Video -->
+          <iframe
+            src="https://www.youtube.com/embed/v7AYKMP6rOE"
+            title="Yoga Tutorial 1"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+
+          <iframe
+            src="https://www.youtube.com/embed/B4kNiCWTl7M?si=rBKUq8Esa8TeCXSp"
+            title="Yoga Tutorial 2"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+
+          <!-- Another YouTube Video -->
+          <iframe
+            src="https://www.youtube.com/embed/brjAjq4zEIE?si=y1t6cwzW69jyo77c"
+            title="Yoga Tutorial 2"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
+      </div>
     </div>
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script>
-        const swiper = new Swiper('.swiper-container', {
-            loop: true,
-            autoplay: {
-                delay: 3000, // Delay between transitions (in milliseconds)
-                disableOnInteraction: false, // Continue autoplay after user interaction
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
+      const swiper = new Swiper(".swiper-container", {
+        loop: true,
+        autoplay: {
+          delay: 3000, // Delay between transitions (in milliseconds)
+          disableOnInteraction: false, // Continue autoplay after user interaction
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
     </script>
-</body>
-
+  </body>
 </html>
