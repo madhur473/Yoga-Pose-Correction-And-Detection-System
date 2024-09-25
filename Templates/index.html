@@ -23,14 +23,14 @@
         font-family: "Roboto", sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #d8e7e4;
+        background: linear-gradient(135deg, #d8e7e4, #b2dfdb);
         color: #fff;
       }
 
       /* Navbar Styling */
       .custom-header {
-        background-color: rgba(0, 0, 0, 0.7);
-        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 15px;
         text-align: center;
         position: fixed;
         top: 0;
@@ -56,40 +56,41 @@
       .custom-header a {
         text-decoration: none;
         color: #fff;
-        font-size: 1rem;
+        font-size: 1.1rem;
         padding: 0.5rem 1rem;
         transition: color 0.3s;
       }
 
       .custom-header a:hover {
-        color: #b2dfdb;
+        color: #ffeb3b;
       }
 
       .sign-in-btn {
-        background-color: #004d40;
+        background: linear-gradient(90deg, #009688, #004d40);
         color: #fff;
         padding: 0.5rem 1rem;
         border-radius: 9999px;
         font-size: 1rem;
         cursor: pointer;
         border: none;
-        transition: background-color 0.3s;
+        transition: transform 0.3s;
       }
 
       .sign-in-btn:hover {
-        background-color: #003d33;
+        transform: scale(1.1);
       }
 
       .main-content {
-        padding-top: 120px; /* Adjust for fixed header */
+        padding-top: 140px; /* Adjust for fixed header */
         text-align: center;
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: rgba(255, 255, 255, 0.9);
         color: #000;
         min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        padding: 20px;
       }
 
       .circle-container {
@@ -111,6 +112,7 @@
         text-decoration: none;
         transition: background-color 0.3s, transform 0.3s;
         font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       }
 
       .circle:hover {
@@ -133,7 +135,7 @@
       /* Swiper styles */
       .swiper-container {
         width: 100%;
-        height: 300px; /* Adjust height as needed */
+        height: 350px; /* Adjust height as needed */
         margin-top: 140px; /* Adds space between navbar and slides */
       }
 
@@ -145,6 +147,7 @@
         color: #000;
         font-size: 1.5rem;
         text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       }
 
       /* Video Tutorial Section */
@@ -165,7 +168,120 @@
         height: 180px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s;
       }
+
+      .video-container iframe:hover,
+      .video-container video:hover {
+        transform: scale(1.05);
+      }
+
+      /* Footer Styling */
+      footer {
+        background-color: #004d40;
+        color: #fff;
+        text-align: center;
+        padding: 30px 0;
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+      }
+
+      .footer-column {
+        flex: 1;
+        padding: 10px;
+      }
+
+      .footer-column h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #ffeb3b;
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-column ul li a {
+        text-decoration: none;
+        color: #fff;
+        transition: color 0.3s;
+      }
+
+      .footer-column ul li a:hover {
+        color: #ffeb3b;
+      }
+
+      .social-icons {
+        margin-top: 20px;
+      }
+
+      .social-icons a {
+        color: #fff;
+        font-size: 1.5rem;
+        margin: 0 10px;
+        transition: transform 0.3s;
+      }
+
+      .social-icons a:hover {
+        transform: scale(1.2);
+        color: #ffeb3b;
+      }
+
+      /* Mobile Responsiveness */
+      @media (max-width: 768px) {
+        .circle-container {
+          flex-direction: column;
+          gap: 30px;
+        }
+
+        .swiper-container {
+          height: 300px;
+        }
+
+        .footer-container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .footer-column {
+          padding: 0;
+          margin: 20px 0;
+        }
+      }
+      .challenge-section {
+  background: linear-gradient(135deg, #4caf50, #2196f3);
+  padding: 60px 20px;
+  color: white;
+}
+
+.start-btn {
+  background-color: #fff;
+  color: #2196f3;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 9999px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.start-btn:hover {
+  background-color: #2196f3;
+  color: white;
+}
+
     </style>
   </head>
 
@@ -177,7 +293,7 @@
       </div>
       <nav class="nav-links flex space-x-4">
         <a href="index.html">Home</a>
-        <a href="#">Poses</a>
+        <a href="plan.html">Diet Plan</a>
         <a href="Analyze.html">Analyze</a>
         <a href="trainers.html">Trainers</a>
         <a href="#">Resources</a>
@@ -235,7 +351,7 @@
           <!-- Another YouTube Video -->
           <iframe
             src="https://www.youtube.com/embed/brjAjq4zEIE?si=y1t6cwzW69jyo77c"
-            title="Yoga Tutorial 2"
+            title="Yoga Tutorial 3"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
@@ -243,6 +359,52 @@
         </div>
       </div>
     </div>
+
+    <!-- 7-Day Challenge Section -->
+<div class="challenge-section bg-gradient-to-r from-green-400 to-blue-500 py-10 text-center">
+  <h2 class="text-4xl font-bold text-white mb-6">7-Day Yoga Challenge</h2>
+  <p class="text-lg text-white mb-8">
+    Ready to kickstart your yoga journey? Join our 7-day challenge to improve flexibility, strength, and mindfulness.
+  </p>
+  <a href="7dayChallenge.html">
+    <button class="start-btn bg-white text-blue-600 px-8 py-4 font-semibold rounded-full shadow-md hover:bg-blue-600 hover:text-white transition duration-300">
+      Start the Challenge
+    </button>
+  </a>
+</div>
+
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul>
+            <li>Email: support@yogapose.com</li>
+            <li>Phone: +1-234-567-890</li>
+            <li>Location: 123 Yoga Street, Mindville</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <p>&copy; 2024 Yoga Pose Correction. All Rights Reserved.</p>
+    </footer>
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7-Day Yoga Challenge</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom Colors */
+    :root {
+      --primary-color: #9CCC65; /* Calming green */
+      --secondary-color: #FFAB91; /* Soft, energizing peach */
+      --background-color: #FFEBEE; /* Light pink background */
+      --accent-color: #FFF8E1; /* Light creamy accent */
+      --hover-color: #4CAF50; /* Deep green hover for active engagement */
+    }
+
+    body {
+      background-color: var(--background-color);
+      font-family: 'Nunito', sans-serif;
+    }
+
+    /* Exit Button Styles */
+    .exit-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1.25rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .exit-btn:hover {
+      background-color: var(--hover-color);
+    }
+
+    /* Other existing styles */
+    .day {
+      background-color: var(--primary-color);
+      padding: 25px;
+      text-align: center;
+      border-radius: 30px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.25rem;
+      transition: background-color 0.4s ease, transform 0.3s ease;
+    }
+
+    .day.active {
+      background-color: var(--hover-color);
+      transform: scale(1.05);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .day:hover {
+      background-color: var(--hover-color);
+    }
+
+    .pose-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+      padding: 25px;
+      background-color: var(--accent-color);
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .pose {
+      background-color: var(--secondary-color);
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s ease;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .pose p {
+      font-weight: 600;
+      color: #37474F;
+      margin: 10px 0 0;
+    }
+
+    .content {
+      display: none;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    .content.active {
+      display: block;
+    }
+
+    .cta-button {
+      background-color: var(--hover-color);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      text-align: center;
+      margin: 40px auto 0;
+    }
+
+    .cta-button:hover {
+      background-color: #388E3C;
+    }
+  </style>
+</head>
+
+<body>
+
+    <a href="index.html" class="exit-btn">Exit</a> <!-- Change "home.html" to your actual homepage -->
+
+  <div class="container mx-auto mt-10 max-w-4xl">
+    <h1 class="text-5xl font-bold text-center mb-10 text-gray-800">7-Day Yoga Challenge</h1>
+    <p class="text-center text-xl text-gray-600 mb-10">
+      Find your balance and start your yoga journey today! Explore a new set of poses every day, designed to help you relax, stretch, and build strength.
+    </p>
+
+    <!-- Day 1 -->
+    <div class="day active" onclick="toggleDropdown(0)">Day 1: Grounding & Balance</div>
+    <div class="content active">
+      <div class="pose-container">
+        <div class="pose">
+          <p>Mountain Pose (Tadasana)</p>
+        </div>
+        <div class="pose">
+          <p>Downward Dog (Adho Mukha Svanasana)</p>
+        </div>
+        <div class="pose">
+          <p>Child's Pose (Balasana)</p>
+        </div>
+        <div class="pose">
+          <p>Warrior I (Virabhadrasana I)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day" onclick="toggleDropdown(1)">Day 2: Flexibility & Focus</div>
+    <div class="content">
+      <div class="pose-container">
+        <div class="pose">
+          <p>Cat-Cow Pose (Marjaryasana)</p>
+        </div>
+        <div class="pose">
+          <p>Cobra Pose (Bhujangasana)</p>
+        </div>
+        <div class="pose">
+          <p>Seated Forward Bend (Paschimottanasana)</p>
+        </div>
+        <div class="pose">
+          <p>Bridge Pose (Setu Bandhasana)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="day" onclick="toggleDropdown(2)">Day 3: Strength & Endurance</div>
+    <div class="content">
+      <div class="pose-container">
+        <div class="pose">
+          <p>Plank Pose (Phalakasana)</p>
+        </div>
+        <div class="pose">
+          <p>Chair Pose (Utkatasana)</p>
+        </div>
+        <div class="pose">
+          <p>Boat Pose (Navasana)</p>
+        </div>
+        <div class="pose">
+          <p>Warrior II (Virabhadrasana II)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div class="day" onclick="toggleDropdown(3)">Day 4: Core Stability</div>
+    <div class="content">
+      <div class="pose-container">
+        <div class="pose">
+          <p>Half Lord of the Fishes (Ardha Matsyendrasana)</p>
+        </div>
+        <div class="pose">
+          <p>Leg Raises (Uttanpadasana)</p>
+        </div>
+        <div class="pose">
+          <p>Side Plank (Vasisthasana)</p>
+        </div>
+        <div class="pose">
+          <p>Warrior III (Virabhadrasana III)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 5 -->
+    <div class="day" onclick="toggleDropdown(4)">Day 5: Hip Openers</div>
+    <div class="content">
+      <div class="pose-container">
+        <div class="pose">
+          <p>Pigeon Pose (Kapotasana)</p>
+        </div>
+        <div class="pose">
+          <p>Garland Pose (Malasana)</p>
+        </div>
+        <div class="pose">
+          <p>Lizard Pose (Utthan Pristhasana)</p>
+        </div>
+        <div class="pose">
+          <p>Bound Angle Pose (Baddha Konasana)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 6 -->
+    <div class="day" onclick="toggleDropdown(5)">Day 6: Backbends</div>
+    <div class="content">
+      <div class="pose-container">
+        <div class="pose">
+          <p>Camel Pose (Ustrasana)</p>
+        </div>
+        <div class="pose">
+          <p>Upward-Facing Dog (Urdhva Mukha Svanasana)</p>
+        </div>
+        <div class="pose">
+          <p>Locust Pose (Salabhasana)</p>
+        </div>
+        <div class="pose">
+          <p>Bow Pose (Dhanurasana)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 7 -->
+    <div class="day" onclick="toggleDropdown(6)">Day 7: Relax & Restore</div>
+    <div class="content">
+      <div class="pose-container">
+        <div class="pose">
+          <p>Reclined Twist (Supta Matsyendrasana)</p>
+        </div>
+        <div class="pose">
+          <p>Legs-Up-the-Wall (Viparita Karani)</p>
+        </div>
+        <div class="pose">
+          <p>Corpse Pose (Savasana)</p>
+        </div>
+        <div class="pose">
+          <p>Supported Bridge Pose (Setu Bandha Sarvangasana)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action Button -->
+    <a href="#" class="cta-button">Start Your Journey Again!</a>
+  </div>
+
+  <script>
+    function toggleDropdown(index) {
+      const contents = document.querySelectorAll('.content');
+      const days = document.querySelectorAll('.day');
+      contents.forEach((content, i) => {
+        if (i === index) {
+          content.classList.toggle('active');
+          days[i].classList.toggle('active');
+        } else {
+          content.classList.remove('active');
+          days[i].classList.remove('active');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

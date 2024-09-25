@@ -1,7 +1,8 @@
 import os
 import subprocess
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+
 import mysql.connector
+from flask import Flask, jsonify, redirect, render_template, request, url_for
 
 app = Flask(__name__, static_url_path='/static', template_folder='Templates')
 
@@ -13,6 +14,10 @@ def index():
 @app.route('/index.html')
 def home():
     return render_template('index.html')
+
+@app.route('/plan.html')
+def diet_plan():
+    return render_template('plan.html')
 
 @app.route('/login.html')
 def login():
@@ -57,6 +62,11 @@ def trainer2():
 @app.route('/trainer-details/trainer3.html')
 def trainer3():
     return render_template('/trainer-details/trainer3.html')
+
+# New 7-Day Challenge Routes
+@app.route('/7dayChallenge.html')
+def challenge():
+    return render_template('7dayChallenge.html')
 
 @app.route('/login', methods=['POST'])
 def login_user():
