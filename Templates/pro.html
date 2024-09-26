@@ -92,6 +92,92 @@
         .back-button:hover {
             background-color: #003d33;
         }
+        footer {
+  background-color: #004d40;
+  color: #fff;
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-container {
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.footer-column {
+  flex: 1;
+  padding: 10px;
+}
+
+.footer-column h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #ffeb3b;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: #ffeb3b;
+}
+
+.social-icons {
+  margin-top: 20px;
+}
+
+.social-icons a {
+  color: #fff;
+  font-size: 1.5rem;
+  margin: 0 10px;
+  transition: transform 0.3s;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  color: #ffeb3b;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .circle-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .swiper-container {
+    height: 300px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-column {
+    padding: 0;
+    margin: 20px 0;
+  }
+}
+
     </style>
 </head>
 
@@ -189,6 +275,36 @@
         </div>
         <a href="index.html" class="back-button">Back to Home</a>
     </div>
+    <footer>
+        <div class="footer-container">
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms of Service</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contact Us</h3>
+            <ul>
+              <li>Email: support@yogapose.com</li>
+              <li>Phone: +1-234-567-890</li>
+              <li>Location: 123 Yoga Street, Mindville</li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+        <p>&copy; 2024 Yoga Pose Correction. All Rights Reserved.</p>
+      </footer>
 </body>
 
 </html>
