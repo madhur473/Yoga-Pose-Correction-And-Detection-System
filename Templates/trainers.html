@@ -141,9 +141,16 @@
         <a href="BreathWork.html">BreathWork</a>
         <a href="contactUs.html">Contact Us</a>
       </nav>
-      <a href="login.html">
-        <button class="sign-in-btn">Sign in</button>
+      {% if user_email %}
+      <p>Hello, {{ user_email }}!</p>
+      <a href="{{ url_for('logout') }}">
+        <button class="sign-in-btn">Logout</button>
       </a>
+  {% else %}
+      <a href="{{ url_for('login_page') }}">
+          <button class="sign-in-btn">Sign in</button>
+      </a>
+  {% endif %}
     </header>
 
     <!-- Trainers Section -->

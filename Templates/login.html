@@ -126,6 +126,12 @@
             background-color: rgb(56, 90, 194);
         }
 
+        .error {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+        }
+
         @keyframes pulse {
             from {
                 transform: scale(0.9);
@@ -140,21 +146,25 @@
     </style>
 </head>
 <body>
-    <form class="form">
+    <form class="form" action="/login" method="POST">
         <p class="title">Login</p>
-        <p class="message">Welcome back! Please enter your details.</p>
+        <p class="message">Welcome back! Please login to your account.</p>
+        
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
         
         <label>
-            <input required="" placeholder="" type="email" class="input">
+            <input required="" placeholder="" type="email" class="input" name="email">
             <span>Email</span>
         </label>
-        
+
         <label>
-            <input required="" placeholder="" type="password" class="input">
+            <input required="" placeholder="" type="password" class="input" name="password">
             <span>Password</span>
         </label>
         
-        <button class="submit">Submit</button>
+        <button class="submit" type="submit">Login</button>
         <p class="signin">Don't have an account? <a href="signup.html">Register</a></p>
     </form>
 </body>
