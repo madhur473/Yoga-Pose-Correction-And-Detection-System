@@ -3,6 +3,7 @@ import cv2
 from time import time
 import mediapipe as mp
 import matplotlib.pyplot as plt
+import winsound
 
 # Initialize mediapipe pose model
 mp_pose = mp.solutions.pose
@@ -163,7 +164,8 @@ def classifyPose(landmarks, output_image, display=False):
         
         # Update the color (to green) with which the label will be written on the image.
         color = (0, 255, 0)  
-    
+    else:
+        winsound.Beep(1000,500)
     # Write the label on the output image. 
     cv2.putText(output_image, label, (10, 60),cv2.FONT_HERSHEY_PLAIN, 2, color, 2)
     

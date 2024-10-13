@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yoga-Inspired Breath Work - Yoga Website</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+      body {
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background: #b2dfdb;
+        color: #2c3e50;
+      }
+
+      .back-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+      .back-button button {
+        background-color: #009688; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+      }
+
+      .back-button button:hover {
+        background-color: #009688;
+      }
+
+      .breath-work-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .breath-work-container::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.3) 0%,
+          rgba(255, 255, 255, 0) 70%
+        );
+        transform: rotate(45deg);
+        z-index: -1;
+      }
+
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        text-align: center;
+        font-size: 2rem;
+      }
+
+      .breath-circle {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin: 2rem auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        color: white;
+        background-color: #3498db;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+        position: relative;
+      }
+
+      .breath-circle::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 0.7;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .control-group {
+        flex: 1 1 calc(50% - 0.5rem);
+        min-width: 150px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #34495e;
+        font-weight: 600;
+      }
+
+      select,
+      input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid #bdc3c7;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+
+      select:focus,
+      input:focus {
+        outline: none;
+        border-color: #3498db;
+      }
+
+      .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      button {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      #startBtn {
+        background-color: #2ecc71;
+        color: white;
+      }
+
+      #stopBtn {
+        background-color: #e74c3c;
+        color: white;
+      }
+
+      #restartBtn {
+        background-color: #f39c12;
+        color: white;
+      }
+
+      .timer {
+        font-size: 2rem;
+        color: #34495e;
+        margin-top: 1.5rem;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      @keyframes breathe {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .breath-work-container {
+          padding: 1.5rem;
+        }
+
+        .breath-circle {
+          width: 150px;
+          height: 150px;
+          font-size: 1.2rem;
+        }
+
+        .control-group {
+          flex: 1 1 100%;
+        }
+
+        .button-group {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        button {
+          margin-bottom: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="back-button">
+      <button onclick="goBack()">Back</button>
+    </div>
+    <script>
+      function goBack() {
+        window.location.href = "index.html"; // This should be the path to your index page
+      }
+    </script>
+
+    <div class="breath-work-container">
+      <h1>Yoga Breath Work</h1>
+      <div class="controls">
+        <div class="control-group">
+          <label for="duration">Duration (minutes):</label>
+          <input type="number" id="duration" min="1" max="30" value="5" />
+        </div>
+        <div class="control-group">
+          <label for="level">Difficulty Level:</label>
+          <select id="level">
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label for="purpose">Purpose:</label>
+          <select id="purpose">
+            <option value="calm">Calm</option>
+            <option value="peace">Peace</option>
+            <option value="stress-relief">Stress Relief</option>
+            <option value="focus">Focus</option>
+            <option value="spiritual">Spiritual</option>
+          </select>
+        </div>
+      </div>
+      <div class="breath-circle" id="breathCircle">Ready</div>
+      <div class="timer" id="timer"></div>
+      <div class="button-group">
+        <button id="startBtn">Start</button>
+        <button id="stopBtn" disabled>Stop</button>
+        <button id="restartBtn" disabled>Restart</button>
+      </div>
+    </div>
+
+    <audio
+      id="startBellSound"
+      src="https://dl.prokerala.com/downloads/ringtones/files/mp3/temple-bell-39617.mp3"
+    >
+      >
+    </audio>
+    <audio
+      id="endBellSound"
+      src="https://dl.prokerala.com/downloads/ringtones/files/mp3/temple-bell-39617.mp3"
+    >
+      >
+    </audio>
+
+    <script>
+      const breathCircle = document.getElementById("breathCircle");
+      const startBtn = document.getElementById("startBtn");
+      const stopBtn = document.getElementById("stopBtn");
+      const restartBtn = document.getElementById("restartBtn");
+      const timerDisplay = document.getElementById("timer");
+      const startBellSound = document.getElementById("startBellSound");
+      const endBellSound = document.getElementById("endBellSound");
+      let intervalId;
+      let timeLeft;
+      let totalTime;
+      let isBreathing = false;
+
+      startBtn.addEventListener("click", startBreathing);
+      stopBtn.addEventListener("click", stopBreathing);
+      restartBtn.addEventListener("click", restartBreathing);
+
+      function startBreathing() {
+        if (isBreathing) return;
+
+        const duration = document.getElementById("duration").value;
+        const level = document.getElementById("level").value;
+        const purpose = document.getElementById("purpose").value;
+
+        timeLeft = duration * 60;
+        totalTime = timeLeft;
+        updateTimerDisplay();
+
+        let breathDuration;
+        switch (level) {
+          case "beginner":
+            breathDuration = 8000;
+            break;
+          case "intermediate":
+            breathDuration = 6000;
+            break;
+          case "advanced":
+            breathDuration = 4000;
+            break;
+        }
+
+        breathCircle.style.animation = `breathe ${breathDuration}ms infinite`;
+        breathCircle.style.backgroundColor = getPurposeColor(purpose);
+
+        intervalId = setInterval(() => {
+          timeLeft--;
+          updateTimerDisplay();
+          if (timeLeft <= 0) {
+            stopBreathing();
+          }
+        }, 1000);
+
+        startBreathAnimation(breathDuration / 2);
+        isBreathing = true;
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        restartBtn.disabled = false;
+        startBellSound.play();
+      }
+
+      function stopBreathing() {
+        clearInterval(intervalId);
+        breathCircle.style.animation = "none";
+        breathCircle.textContent = "Paused";
+        isBreathing = false;
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        endBellSound.play();
+      }
+
+      function restartBreathing() {
+        stopBreathing();
+        breathCircle.textContent = "Ready";
+        timeLeft = totalTime;
+        updateTimerDisplay();
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        restartBtn.disabled = true;
+      }
+
+      function updateTimerDisplay() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerDisplay.textContent = `${minutes}:${seconds
+          .toString()
+          .padStart(2, "0")}`;
+      }
+
+      function getPurposeColor(purpose) {
+        switch (purpose) {
+          case "calm":
+            return "#3498db";
+          case "peace":
+            return "#2ecc71";
+          case "stress-relief":
+            return "#9b59b6";
+          case "focus":
+            return "#e74c3c";
+          case "spiritual":
+            return "#f39c12";
+          default:
+            return "#3498db";
+        }
+      }
+
+      function startBreathAnimation(duration) {
+        let isInhaling = true;
+        setBreathText(isInhaling);
+
+        setInterval(() => {
+          if (isBreathing) {
+            isInhaling = !isInhaling;
+            setBreathText(isInhaling);
+          }
+        }, duration);
+      }
+
+      function setBreathText(isInhaling) {
+        breathCircle.textContent = isInhaling ? "Inhale" : "Exhale";
+      }
+    </script>
+  </body>
+</html>

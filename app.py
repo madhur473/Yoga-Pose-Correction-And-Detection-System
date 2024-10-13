@@ -19,6 +19,10 @@ def home():
 def diet_plan():
     return render_template('plan.html')
 
+@app.route('/BreathWork.html')
+def BreathWork():
+    return render_template('BreathWork.html')
+
 @app.route('/login.html')
 def login():
     return render_template('login.html', error=None)
