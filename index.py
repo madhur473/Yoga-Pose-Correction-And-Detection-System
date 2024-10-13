@@ -108,6 +108,17 @@ def classifyPose(landmarks, output_image, display=False):
                                       landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value],
                                       landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value])
     
+    # Get the angle between the left shoulder, hip, and knee points.
+    left_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value],
+                                    landmarks[mp_pose.PoseLandmark.LEFT_HIP.value],
+                                    landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value])
+    
+    # Get the angle between the right shoulder, hip, and knee points.
+    right_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value],
+                                     landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value],
+                                     landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value])
+
+    
     #----------------------------------------------------------------------------------------------------------------
     
     # Check if it is the warrior II pose or the T pose.
@@ -158,7 +169,39 @@ def classifyPose(landmarks, output_image, display=False):
             label = 'Tree Pose'
                 
     #----------------------------------------------------------------------------------------------------------------
+    #----------------------------------------------------------------------------------------------------------#
+        # Check if it is the Butterfly Pose.
+    # Knees spread apart, feet together, upright torso.
+    # Check if it is the Butterfly Pose.
+    if (left_knee_angle > 60 and left_knee_angle < 120) and (right_knee_angle > 60 and right_knee_angle < 120) and \
+       (left_hip_angle > 20 and left_hip_angle < 70) and (right_hip_angle > 20 and right_hip_angle < 70):
+
+        # Optionally check the shoulders but make it less strict.
+        if (left_shoulder_angle > 150 and right_shoulder_angle > 150):
+            label = 'Butterfly Pose'
+        else:
+            label = 'Butterfly Pose'  # Still classify if the shoulders are not in the exact position
     
+     # Check if one leg is straight (supporting the body)
+    if (left_knee_angle > 165 and left_knee_angle < 195) or (right_knee_angle > 165 and right_knee_angle < 195):
+
+        # Check if the other leg is bent and lifted (calf raised).
+        if (left_knee_angle > 60 and left_knee_angle < 100) or (right_knee_angle > 60 and right_knee_angle < 100):
+
+            # Specify the label of the pose that is One-Legged Stand.
+            label = 'One-Legged Stand'
+    
+    #--------------------------------------------#
+    # The side plank is characterized by one straight arm supporting the body, and straight alignment from shoulder to ankle.
+    if (left_elbow_angle > 160 and left_elbow_angle < 180) and (left_hip_angle > 160 and left_hip_angle < 180):
+        # Left side plank (left arm supports the body)
+        label = 'Side Plank (Left)'
+
+    elif (right_elbow_angle > 160 and right_elbow_angle < 180) and (right_hip_angle > 160 and right_hip_angle < 180):
+        # Right side plank (right arm supports the body)
+        label = 'Side Plank (Right)'
+
+
     # Check if the pose is classified successfully
     if label != 'Unknown Pose':
         
@@ -251,5 +294,5 @@ def main():
     cap.release()
     cv2.destroyAllWindows()
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
