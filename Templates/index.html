@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yoga Pose Correction And Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+    <style>
+      body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #d8e7e4, #b2dfdb);
+  color: #fff;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+
+}
+
+/* Navbar Styling */
+.custom-header {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 15px;
+  text-align: center;
+  position: fixed; /* Fixed to prevent overlap */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* On top of other content */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.custom-header .nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.custom-header a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s;
+}
+
+.custom-header a:hover {
+  color: #ffeb3b;
+}
+
+.sign-in-btn {
+  background: linear-gradient(90deg, #009688, #004d40);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.3s;
+}
+
+.sign-in-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Main Content */
+.main-content {
+  padding-top: 140px; /* Adjust padding to avoid overlap */
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.circle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 130px;
+}
+
+.circle {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.3s;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.circle:hover {
+  background-color: #003d33;
+  transform: scale(1.1);
+}
+
+.circle.beginner {
+  background-color: #009688;
+}
+
+.circle.intermediate {
+  background-color: #00796b;
+}
+
+.circle.pro {
+  background-color: #004d40;
+}
+
+/* Container for each slide */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Styling for slide content */
+.slide-content {
+  max-width: 80%; /* Adjust width */
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  margin-top: 7%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.slide-content img {
+  max-width: 100%; /* Make images responsive */
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.slide-content h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.slide-content p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* Video Tutorial Section */
+.video-tutorials {
+  margin-top: 40px;
+}
+
+.video-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.video-container iframe,
+.video-container video {
+  width: 320px;
+  height: 180px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+}
+
+.video-container iframe:hover,
+.video-container video:hover {
+  transform: scale(1.05);
+}
+
+/* Footer Styling */
+footer {
+  background-color: #004d40;
+  color: #fff;
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-container {
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.footer-column {
+  flex: 1;
+  padding: 10px;
+}
+
+.footer-column h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #ffeb3b;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: #ffeb3b;
+}
+
+.social-icons {
+  margin-top: 20px;
+}
+
+.social-icons a {
+  color: #fff;
+  font-size: 1.5rem;
+  margin: 0 10px;
+  transition: transform 0.3s;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  color: #ffeb3b;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .circle-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .swiper-container {
+    height: 300px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-column {
+    padding: 0;
+    margin: 20px 0;
+  }
+}
+
+.challenge-section {
+  background: linear-gradient(135deg, #4caf50, #2196f3);
+  padding: 60px 20px;
+  color: white;
+}
+
+.start-btn {
+  background-color: #fff;
+  color: #2196f3;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 9999px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.start-btn:hover {
+  background-color: #2196f3;
+  color: white;
+}
+
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <header class="custom-header">
+      <div class="logo flex items-center">
+        <img src="/static/images/logo.png" alt="Logo" class="w-24 h-24" />
+      </div>
+      <nav class="nav-links flex space-x-4">
+        <a href="index.html">Home</a>
+        <a href="plan.html">Diet Plan</a>
+        <a href="Analyze.html">Analyze</a>
+        <a href="trainers.html">Trainers</a>
+        <a href="BreathWork.html">BreathWork</a>
+        <a href="contactUs.html">Contact Us</a>
+      </nav>
+      
+      {% if user_email %}
+      <div class="flex items-center space-x-4">
+          <p>Hello, {{ user_email }}!</p>
+          {% if streak_count is not none %}
+            <span class="bg-green-500 text-white px-2 py-1 rounded-full text-sm">{{ streak_count }} day streak</span>
+          {% endif %}
+          <a href="{{ url_for('logout') }}">
+            <button class="sign-in-btn">Logout</button>
+          </a>
+      </div>
+  {% else %}
+      <a href="{{ url_for('login_page') }}">
+          <button class="sign-in-btn">Sign in</button>
+      </a>
+  {% endif %}
+    </header>
+
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <!-- Slide 1 -->
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <img src="/static/images/1.jpg" alt="Slide 1 Image">
+          </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <img src="/static/images/2.jpg" alt="Slide 2 Image">
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <img src="/static/images/3.jpg" alt="Slide 3 Image">
+          </div>
+        </div>
+      </div>
+    
+      <!-- Pagination -->
+    </div>
+    
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <h2 class="level-title" style="font-size: 24px; font-weight: bold; color: #333; text-align: center; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">
+        Choose Your Level
+      </h2>
+      <!-- Yoga Pose Levels -->
+      <div class="circle-container">
+        <a href="Begineer.html" class="circle beginner">Beginner</a>
+        <a href="intermediate.html" class="circle intermediate">Intermediate</a>
+        <a href="pro.html" class="circle pro">Pro</a>
+      </div>
+
+      <!-- Video Tutorials Section -->
+      <div class="video-tutorials">
+        <h2 class="level-title" style="font-size: 24px; font-weight: bold; color: #333; text-align: center; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">
+          Yoga Pose Tutorials        
+        </h2>
+       
+        <div class="video-container">
+          <!-- Example YouTube Video -->
+          <iframe
+            src="https://www.youtube.com/embed/v7AYKMP6rOE"
+            title="Yoga Tutorial 1"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+
+          <iframe
+            src="https://www.youtube.com/embed/B4kNiCWTl7M?si=rBKUq8Esa8TeCXSp"
+            title="Yoga Tutorial 2"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+
+          <!-- Another YouTube Video -->
+          <iframe
+            src="https://www.youtube.com/embed/brjAjq4zEIE?si=y1t6cwzW69jyo77c"
+            title="Yoga Tutorial 3"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7-Day Challenge Section -->
+    <div
+      class="challenge-section bg-gradient-to-r from-green-400 to-blue-500 py-10 text-center"
+    >
+      <h2 class="text-4xl font-bold text-white mb-6">7-Day Yoga Challenge</h2>
+      <p class="text-lg text-white mb-8">
+        Ready to kickstart your yoga journey? Join our 7-day challenge to
+        improve flexibility, strength, and mindfulness.
+      </p>
+      <a href="7dayChallenge.html">
+        <button
+          class="start-btn bg-white text-blue-600 px-8 py-4 font-semibold rounded-full shadow-md hover:bg-blue-600 hover:text-white transition duration-300"
+        >
+          Start the Challenge
+        </button>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul>
+            <li>Email: support@yogapose.com</li>
+            <li>Phone: +1-234-567-890</li>
+            <li>Location: 123 Yoga Street, Mindville</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <p>&copy; 2024 Yoga Pose Correction. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper(".swiper-container", {
+        loop: true,
+        autoplay: {
+          delay: 3000, // Delay between transitions (in milliseconds)
+          disableOnInteraction: false, // Continue autoplay after user interaction
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+
+      
+    </script>
+  </body>
+</html>

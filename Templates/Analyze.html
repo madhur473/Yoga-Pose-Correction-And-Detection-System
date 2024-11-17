@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yoga Pose Correction And Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #d8e7e4;
+        color: #fff;
+      }
+
+      .custom-header {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      }
+
+      .logo img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .info-box {
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        background-color: rgba(0, 0, 0, 0.7);
+        margin: 120px auto 20px;
+        max-width: 80%;
+        width: 500px;
+      }
+
+      .video-container video {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+
+      .main-content {
+        padding-top: 120px; /* Adjust for fixed header */
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #000;
+      }
+
+      .custom-header .nav-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .custom-header a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        transition: color 0.3s;
+      }
+
+      .custom-header a:hover {
+        color: #b2dfdb;
+      }
+
+      .sign-in-btn {
+        background-color: #004d40;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        font-size: 1rem;
+        cursor: pointer;
+        border: none;
+        transition: background-color 0.3s;
+      }
+
+      .sign-in-btn:hover {
+        background-color: #003d33;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="custom-header">
+      <div class="logo flex items-center">
+        <img src="/static/images/logo.png" alt="Logo" class="w-24 h-24" />
+      </div>
+      <nav class="nav-links flex space-x-4">
+        <a href="index.html">Home</a>
+        <a href="plan.html">Diet Plan</a>
+        <a href="Analyze.html">Analyze</a>
+        <a href="trainers.html">Trainers</a>
+        <a href="BreathWork.html">BreathWork</a>
+        <a href="contactUs.html">Contact Us</a>
+      </nav>
+      {% if user_email %}
+      <p>Hello, {{ user_email }}!</p>
+      <a href="{{ url_for('logout') }}">
+        <button class="sign-in-btn">Logout</button>
+      </a>
+  {% else %}
+      <a href="{{ url_for('login_page') }}">
+          <button class="sign-in-btn">Sign in</button>
+      </a>
+  {% endif %}
+    </header>
+
+    <div class="info-box">
+      <h1 class="text-2xl font-bold mb-4">Asanalyze</h1>
+      <p class="text-lg mb-4">AI-Powered Yoga Pose Perfection</p>
+      <div class="video-container mb-4">
+        <video autoplay loop muted>
+          <source src="static/images/GIF.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <button
+        onclick="executePythonScript()"
+        class="bg-blue-500 text-white px-6 py-2 rounded-full"
+      >
+        Let's Go
+      </button>
+    </div>
+
+    <script>
+      function executePythonScript() {
+        fetch("/execute-script", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ scriptName: "index.py" }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.text();
+          })
+          .then((data) => {
+            console.log("Python script executed successfully:", data);
+          })
+          .catch((error) => {
+            console.error("Error executing Python script:", error);
+          });
+      }
+    </script>
+  </body>
+</html>

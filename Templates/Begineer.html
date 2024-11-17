@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner Yoga Poses</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #d8e7e4;
+            color: #000;
+        }
+        .header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+        }
+        .header a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .header a:hover {
+            color: #b2dfdb;
+        }
+        .pose-card {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border-radius: 0.375rem;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .progress-container {
+            position: relative;
+            width: 100%;
+            height: 1.25rem;
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            margin-bottom: 1.25rem;
+        }
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: #10b981;
+            border-radius: 9999px;
+            transition: width 0.3s ease-in-out;
+        }
+        .completion-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            display: none;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 0.375rem;
+            max-width: 500px;
+            width: 90%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #completionGif {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+            max-width: 90%;
+            max-height: 90%;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        #nextButton {
+            display: none;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <header class="header">
+        <h1 class="text-2xl font-bold mb-2">Beginner Yoga Poses</h1>
+        <a href="index.html" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition duration-200">
+            Exit
+        </a>
+            </header>
+
+    <main class="p-5 text-center">
+        <div class="progress-container">
+            <div id="progressBar" class="progress-bar"></div>
+            <div id="completionMessage" class="completion-message">Done!</div>
+        </div>
+
+        <div id="poseContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        </div>
+
+        <a href="intermediate.html">
+          <button id="nextButton" 
+                  class="mt-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+              Next: Go to Intermediate Level
+          </button>
+      </a>
+      
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle" class="text-xl font-semibold mb-4"></h2>
+                <div class="video-container">
+                    <iframe id="videoFrame" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="completionGif">
+            <img src="/static/images/completed.gif" 
+                alt="Yoga Achievement"
+                class="w-64 h-64 object-cover mb-4">
+            <h2 class="text-2xl font-bold mb-4">Congratulations!</h2>
+            <p class="mb-4">You've completed all beginner yoga poses!</p>
+            <button id="closeCompletionGif" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
+                Close
+            </button>
+        </div>
+    </main>
+
+    <footer class="bg-[#004d40] text-white text-center py-8 mt-12">
+        <p>&copy; 2024 Beginner Yoga Poses. All Rights Reserved.</p>
+        <div class="mt-4 space-x-4">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#b2dfdb]">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#b2dfdb]">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#b2dfdb]">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        const yogaPoses = [
+            { name: "Mountain Pose (Tadasana)", videoId: "2HTvZp5rPrg", image: "/static/images/Mountain-pose.jpeg", description: "This fundamental pose improves posture and balance. Stand with your feet together, arms at your sides, and weight evenly distributed on both feet. Engage your thighs and lift your chest. Hold for 30 seconds to 1 minute." },
+            { name: "Downward Dog (Adho Mukha Svanasana)", videoId: "EC7RGJ975iM", image: "/static/images/ADHO MUKHA.jpg", description: "A great pose for stretching and strengthening the entire body. Start on your hands and knees, lift your hips towards the ceiling, and straighten your legs. Keep your hands shoulder-width apart and feet hip-width apart. Hold for 30 seconds to 1 minute." },
+            { name: "Child's Pose (Balasana)", videoId: "2MJGg-dUKh0", image: "/static/images/ChildPose.png", description: "This restful pose helps to relax and stretch the back and hips. Kneel on the floor, sit back on your heels, and stretch your arms forward on the mat. Rest your forehead on the ground and hold for 1 to 3 minutes." },
+            { name: "Warrior I (Virabhadrasana I)", videoId: "kkGY3xBnaGc", image: "/static/images/warrior_pose.jpg", description: "This pose strengthens the legs, opens the hips, and builds stamina. Step one foot forward, bend your front knee, and raise your arms overhead. Hold for 30 seconds on each side." },
+            { name: "Tree Pose (Vrikshasana)", videoId: "Dic293YNJI8", image: "/static/images/tree_pose.jpg", description: "Improve your balance and focus with this pose. Stand on one leg, place the sole of the other foot on your inner thigh, and bring your hands together in front of your chest. Hold for 30 seconds on each side." },
+            { name: "Bridge Pose (Setu Bandhasana)", videoId: "g78vfuC4QBI", image: "/static/images/bridge_pose.jpg", description: "This pose strengthens the back and opens the chest. Lie on your back with your knees bent, feet flat on the floor, and lift your hips towards the ceiling. Hold for 30 seconds to 1 minute." },
+            { name: "Cobra Pose (Bhujangasana)", videoId: "Y8UNFem5qHc", image: "/static/images/cobra_pose.jpg", description: "Stretch your chest and strengthen your spine with this gentle backbend. Lie on your stomach, place your hands under your shoulders, and lift your chest off the ground. Hold for 15 to 30 seconds." },
+            { name: "Seated Forward Bend (Paschimottanasana)", videoId: "T8sgVyF4Ux4", image: "/static/images/seat_back_pose.jpg", description: "This pose stretches the hamstrings and back. Sit with your legs extended in front of you, and reach for your feet, keeping your back straight. Hold for 30 seconds to 1 minute." },
+            { name: "Cat-Cow Pose (Marjaryasana-Bitilasana)", videoId: "rpRnIsavO4k", image: "/static/images/cow_pose.png", description: "This dynamic sequence stretches the spine and relieves tension. Start on your hands and knees, alternate arching and rounding your back, and hold each position for a few seconds. Repeat for 1 to 2 minutes." },
+            { name: "Triangle Pose (Trikonasana)", videoId: "S6gB0QHbWFE", image: "/static/images/triangle_pose.jpg", description: "This pose strengthens the legs and stretches the hips, spine, chest, and shoulders. Stand with your feet wide apart, turn one foot out, and reach one hand toward the floor while the other hand reaches up. Hold for 30 seconds on each side." },
+            { name: "Garland Pose (Malasana)", videoId: "goJthOXs9ZU", image: "/static/images/garland_pose.jpg", description: "This squat pose opens the hips and stretches the ankles and lower back. Squat with your feet slightly wider than hip-width, bringing your palms together at your chest. Hold for 30 seconds to 1 minute." },
+            { name: "Hero Pose (Virasana)", videoId: "7LEoCbIL3qs", image: "/static/images/hero_pose.jpg", description: "This seated pose stretches the thighs and improves posture. Kneel on the floor, sit back on your heels, and rest your hands on your thighs. Hold for 1 to 3 minutes." }
+        ];
+
+        const watchedVideos = new Set();
+        const poseContainer = document.getElementById('poseContainer');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modalTitle');
+        const videoFrame = document.getElementById('videoFrame');
+        const closeBtn = document.querySelector('.close');
+        const progressBar = document.getElementById('progressBar');
+        const completionMessage = document.getElementById('completionMessage');
+        const completionGif = document.getElementById('completionGif');
+        const nextButton = document.getElementById('nextButton');
+        const closeCompletionGifBtn = document.getElementById('closeCompletionGif');
+
+        function createPoseCard(pose) {
+            const card = document.createElement('div');
+            card.className = 'pose-card';
+            card.innerHTML = `
+                <img src="${pose.image}" alt="${pose.name}" class="w-full h-auto rounded-md mb-4">
+                <h2 class="text-lg font-semibold mb-2">${pose.name}</h2>
+                <p class="text-sm mb-4">${pose.description}</p>
+                <button class="watch-video-btn bg-white text-black px-4 py-2 rounded hover:bg-gray-200 transition-colors" data-name="${pose.name}" data-video-id="${pose.videoId}">
+                    Watch Video
+                </button>
+            `;
+            return card;
+        }
+
+        function renderPoseCards() {
+            yogaPoses.forEach(pose => {
+                const card = createPoseCard(pose);
+                poseContainer.appendChild(card);
+            });
+        }
+
+        function openModal(title, videoId) {
+            modal.style.display = 'block';
+            modalTitle.textContent = title;
+            videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            watchedVideos.add(videoId);
+            updateProgressBar();
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            videoFrame.src = '';
+        }
+
+        function updateProgressBar() {
+            const progress = (watchedVideos.size / yogaPoses.length) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            if (progress === 100) {
+                completionMessage.style.display = 'block';
+                nextButton.style.display = 'inline-block';
+                showCompletionGif();
+            }
+        }
+
+        function showCompletionGif() {
+            completionGif.style.display = 'block';
+        }
+
+        function hideCompletionGif() {
+            completionGif.style.display = 'none';
+        }
+
+        function goToIntermediateLevel() {
+            // Implement navigation to intermediate level page
+            console.log("Navigating to intermediate level...");
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPoseCards();
+            
+            // Add event listener for all "Watch Video" buttons
+            poseContainer.addEventListener('click', (e) => {
+                
+                if (e.target.classList.contains('watch-video-btn')) {
+                    const name = e.target.getAttribute('data-name');
+                    const videoId = e.target.getAttribute('data-video-id');
+                    openModal(name, videoId);
+                }
+            });
+        });
+
+        closeBtn.addEventListener('click', closeModal);
+        closeCompletionGifBtn.addEventListener('click', hideCompletionGif);
+        nextButton.addEventListener('click', goToIntermediateLevel);
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

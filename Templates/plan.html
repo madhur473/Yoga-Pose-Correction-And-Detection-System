@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Healthy Diet Plan</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+      :root {
+        --primary-color: #009688;
+        --secondary-color: #f39c12;
+        --background-color: #f4f4f4;
+        --card-background: #ffffff;
+        --text-color: #333333;
+        --shadow-color: rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--background-color);
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .back-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+      .back-button button {
+        background-color: #009688; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+      }
+
+      .back-button button:hover {
+        background-color: #009688;
+      }
+
+      h1,
+      h2 {
+        color: var(--primary-color);
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+      }
+
+      .tab {
+        padding: 12px 24px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1em;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .tab:first-child {
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+      }
+
+      .tab:last-child {
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+      }
+
+      .tab:hover,
+      .tab.active {
+        background-color: var(--secondary-color);
+        transform: translateY(-3px);
+        box-shadow: 0 4px 6px var(--shadow-color);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .meal-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        justify-content: center;
+      }
+
+      .meal-card {
+        background-color: var(--card-background);
+        border-radius: 15px;
+        box-shadow: 0 10px 20px var(--shadow-color);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .meal-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px var(--shadow-color);
+      }
+
+      .meal-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .meal-card:hover .meal-image {
+        transform: scale(1.05);
+      }
+
+      .meal-info {
+        padding: 20px;
+      }
+
+      .meal-title {
+        font-size: 1.2em;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+      }
+
+      .nutrition-info {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .nutrition-item {
+        background-color: rgba(74, 144, 226, 0.1);
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 0.9em;
+        text-align: center;
+        transition: background-color 0.3s ease;
+      }
+
+      .nutrition-item:hover {
+        background-color: rgba(74, 144, 226, 0.2);
+      }
+
+      .nutrition-item.wide {
+        grid-column: span 2;
+        background-color: rgba(243, 156, 18, 0.1);
+      }
+
+      .nutrition-item.wide:hover {
+        background-color: rgba(243, 156, 18, 0.2);
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+
+        h1 {
+          font-size: 2em;
+        }
+
+        .tab {
+          padding: 10px 20px;
+          font-size: 0.9em;
+        }
+
+        .meal-options {
+          grid-template-columns: 1fr;
+        }
+      }
+      footer {
+  background-color: #004d40;
+  color: #fff;
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-container {
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.footer-column {
+  flex: 1;
+  padding: 10px;
+}
+
+.footer-column h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #ffeb3b;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: #ffeb3b;
+}
+
+.social-icons {
+  margin-top: 20px;
+}
+
+.social-icons a {
+  color: #fff;
+  font-size: 1.5rem;
+  margin: 0 10px;
+  transition: transform 0.3s;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  color: #ffeb3b;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .circle-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .swiper-container {
+    height: 300px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-column {
+    padding: 0;
+    margin: 20px 0;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="back-button">
+      <button onclick="goBack()">Back</button>
+    </div>
+    <script>
+      function goBack() {
+        window.location.href = "index.html"; // This should be the path to your index page
+      }
+    </script>
+
+    <div class="container">
+      <h1>Healthy Diet Plan</h1>
+
+      <div class="tabs">
+        <button class="tab active" onclick="openTab(event, 'breakfast')">
+          Breakfast
+        </button>
+        <button class="tab" onclick="openTab(event, 'lunch')">Lunch</button>
+        <button class="tab" onclick="openTab(event, 'dinner')">Dinner</button>
+      </div>
+
+      <div id="breakfast" class="tab-content active">
+        <div class="meal-options">
+          <div class="meal-card">
+            <img
+              src="static\images\Upma.jpeg"
+              alt="Oats Upma"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">Oats Upma</div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 255</span>
+                <span class="nutrition-item">Carbs: 45g</span>
+                <span class="nutrition-item">Fat: 7g</span>
+                <span class="nutrition-item">Protein: 8g</span>
+                <span class="nutrition-item wide">Fiber: 8g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="static\images\Moong Dal Chilla.jpeg"
+              alt="Moong Dal Chilla (Savory Lentil Pancake)"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">
+                Moong Dal Chilla (Savory Lentil Pancake)
+              </div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 150</span>
+                <span class="nutrition-item">Carbs: 20g</span>
+                <span class="nutrition-item">Fat: 3g</span>
+                <span class="nutrition-item">Protein: 10g</span>
+                <span class="nutrition-item wide">Fiber: 4g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="\static\images\Poha (Flattened Rice) with Vegetables.jpeg"
+              alt="Poha (Flattened Rice) with Vegetables"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">
+                Poha (Flattened Rice) with Vegetables
+              </div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 200</span>
+                <span class="nutrition-item">Carbs: 35g</span>
+                <span class="nutrition-item">Fat: 5g</span>
+                <span class="nutrition-item">Protein: 4g</span>
+                <span class="nutrition-item wide">Fiber: 3g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="\static\images\Idli with Sambar.jpeg"
+              alt="Idli with Sambar"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">Idli with Sambar</div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 180</span>
+                <span class="nutrition-item">Carbs: 30g</span>
+                <span class="nutrition-item">Fat: 2g</span>
+                <span class="nutrition-item">Protein: 8g</span>
+                <span class="nutrition-item wide">Fiber: 5g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="\static\images\Besan Cheela (Chickpea Flour Pancake).jpeg"
+              alt=" Besan Cheela (Chickpea Flour Pancake)"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">
+                Besan Cheela (Chickpea Flour Pancake)
+              </div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 1700</span>
+                <span class="nutrition-item">Carbs: 25g</span>
+                <span class="nutrition-item">Fat: 5g</span>
+                <span class="nutrition-item">Protein: 8g</span>
+                <span class="nutrition-item wide">Fiber: 6g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="\static\images\Vegetable Dalia (Broken Wheat Porridge).jpeg"
+              alt="Vegetable Dalia (Broken Wheat Porridge)"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">
+                Vegetable Dalia (Broken Wheat Porridge)
+              </div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 220</span>
+                <span class="nutrition-item">Carbs: 40g</span>
+                <span class="nutrition-item">Fat: 4g</span>
+                <span class="nutrition-item">Protein: 8g</span>
+                <span class="nutrition-item wide">Fiber: 7g</span>
+              </div>
+            </div>
+          </div>
+          <!-- Add more meals as needed -->
+        </div>
+      </div>
+
+      <div id="lunch" class="tab-content">
+        <div class="meal-options">
+          <div class="meal-card">
+            <img
+              src="\static\images\Chickpea Salad.jpeg"
+              alt="Chickpea Salad"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">Chickpea Salad</div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 240</span>
+                <span class="nutrition-item">Carbs: 40g</span>
+                <span class="nutrition-item">Fat: 6g</span>
+                <span class="nutrition-item">Protein: 12g</span>
+                <span class="nutrition-item wide">Fiber: 10g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="\static\images\Quinoa Vegetable Pulao.jpeg"
+              alt=" Quinoa Vegetable Pulao"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">Quinoa Vegetable Pulao</div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 300</span>
+                <span class="nutrition-item">Carbs: 50g</span>
+                <span class="nutrition-item">Fat: 8g</span>
+                <span class="nutrition-item">Protein: 10g</span>
+                <span class="nutrition-item wide">Fiber: 6g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="\static\images\Palak Paneer with Whole Wheat Roti.jpeg"
+              alt="Palak Paneer with Whole Wheat Roti"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">Palak Paneer with Whole Wheat Roti</div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 400</span>
+                <span class="nutrition-item">Carbs: 45g</span>
+                <span class="nutrition-item">Fat: 20g</span>
+                <span class="nutrition-item">Protein: 18g</span>
+                <span class="nutrition-item wide">Fiber: 5g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="\static\images\Mixed Vegetable Curry with Brown Rice.jpeg"
+              alt="Mixed Vegetable Curry with Brown Rice"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">
+                Mixed Vegetable Curry with Brown Rice
+              </div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 350</span>
+                <span class="nutrition-item">Carbs: 60g</span>
+                <span class="nutrition-item">Fat: 10g</span>
+                <span class="nutrition-item">Protein: 8g</span>
+                <span class="nutrition-item wide">Fiber: 8g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="\static\images\Lentil Soup (Dal) with Quinoa.jpeg"
+              alt="Lentil Soup (Dal) with Quinoa"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">Lentil Soup (Dal) with Quinoa</div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 280</span>
+                <span class="nutrition-item">Carbs: 45g</span>
+                <span class="nutrition-item">Fat: 4g</span>
+                <span class="nutrition-item">Protein: 15g</span>
+                <span class="nutrition-item wide">Fiber: 9g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="\static\images\Stuffed Paratha with Curd (Yogurt).jpeg"
+              alt=" Stuffed Paratha with Curd (Yogurt)"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">Stuffed Paratha with Curd (Yogurt)</div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 350</span>
+                <span class="nutrition-item">Carbs: 50g</span>
+                <span class="nutrition-item">Fat: 15g</span>
+                <span class="nutrition-item">Protein: 12g</span>
+                <span class="nutrition-item wide">Fiber: 7g</span>
+              </div>
+            </div>
+          </div>
+          <!-- Add more meals as needed -->
+        </div>
+      </div>
+
+      <div id="dinner" class="tab-content">
+        <div class="meal-options">
+          <div class="meal-card">
+            <img
+              src="\static\images\Vegetable Stir-Fry with Brown Rice.jpeg"
+              alt="Vegetable Stir-Fry with Brown Rice"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">Vegetable Stir-Fry with Brown Rice</div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 355</span>
+                <span class="nutrition-item">Carbs: 55g</span>
+                <span class="nutrition-item">Fat: 10g</span>
+                <span class="nutrition-item">Protein: 10g</span>
+                <span class="nutrition-item wide">Fiber: 6g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="\static\images\Grilled Tandoori Chicken with Salad.jpeg"
+              alt="Grilled Tandoori Chicken with Salad"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">Grilled Tandoori Chicken with Salad</div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 300</span>
+                <span class="nutrition-item">Carbs: 10g</span>
+                <span class="nutrition-item">Fat: 15g</span>
+                <span class="nutrition-item">Protein: 30g</span>
+                <span class="nutrition-item wide">Fiber: 3g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="\static\images\Chana Masala with Quinoa.jpeg"
+              alt="Chana Masala with Quinoa"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">Chana Masala with Quinoa</div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 400</span>
+                <span class="nutrition-item">Carbs: 60g</span>
+                <span class="nutrition-item">Fat: 8g</span>
+                <span class="nutrition-item">Protein: 20g</span>
+                <span class="nutrition-item wide">Fiber: 12g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="\static\images\Spinach and Lentil Curry (Palak Dal).jpeg"
+              alt=" Spinach and Lentil Curry (Palak Dal)"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">Spinach and Lentil Curry (Palak Dal)</div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 285</span>
+                <span class="nutrition-item">Carbs: 45g</span>
+                <span class="nutrition-item">Fat: 5g</span>
+                <span class="nutrition-item">Protein: 14g</span>
+                <span class="nutrition-item wide">Fiber: 9g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="\static\images\Stuffed Bell Peppers with Mixed Vegetables.jpeg"
+              alt="Stuffed Bell Peppers with Mixed Vegetables"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">
+                Stuffed Bell Peppers with Mixed Vegetables
+              </div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 320</span>
+                <span class="nutrition-item">Carbs: 50g</span>
+                <span class="nutrition-item">Fat: 8g</span>
+                <span class="nutrition-item">Protein: 14g</span>
+                <span class="nutrition-item wide">Fiber: 7g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <img
+              src="\static\images\Methi Thepla (Fenugreek Flatbread) with Yogurt.jpeg"
+              alt="Methi Thepla (Fenugreek Flatbread) with Yogurt"
+              class="meal-image"
+            />
+            <div class="meal-info">
+              <div class="meal-title">
+                Methi Thepla (Fenugreek Flatbread) with Yogurt
+              </div>
+              <div class="nutrition-info">
+                <span class="nutrition-item">Calories: 350</span>
+                <span class="nutrition-item">Carbs: 55g</span>
+                <span class="nutrition-item">Fat: 12g</span>
+                <span class="nutrition-item">Protein: 10g</span>
+                <span class="nutrition-item wide">Fiber: 5g</span>
+              </div>
+            </div>
+          </div>
+          <!-- Add more meals as needed -->
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul>
+            <li>Email: support@yogapose.com</li>
+            <li>Phone: +1-234-567-890</li>
+            <li>Location: 123 Yoga Street, Mindville</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <p>&copy; 2024 Yoga Pose Correction. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      function openTab(evt, tabName) {
+        var i, tabContent, tabLinks;
+        tabContent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabContent.length; i++) {
+          tabContent[i].style.display = "none";
+        }
+        tabLinks = document.getElementsByClassName("tab");
+        for (i = 0; i < tabLinks.length; i++) {
+          tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+    </script>
+  </body>
+</html>

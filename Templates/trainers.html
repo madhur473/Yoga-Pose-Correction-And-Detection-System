@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trainers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #d8e7e4;
+        color: #fff;
+      }
+
+      .custom-header {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      }
+
+      .logo img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .custom-header .nav-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .custom-header a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        transition: color 0.3s;
+      }
+
+      .custom-header a:hover {
+        color: #b2dfdb;
+      }
+
+      .sign-in-btn {
+        background-color: #004d40;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        font-size: 1rem;
+        cursor: pointer;
+        border: none;
+        transition: background-color 0.3s;
+      }
+
+      .sign-in-btn:hover {
+        background-color: #003d33;
+      }
+
+      /* Main content styles for trainers */
+      .main-content {
+        padding-top: 120px; /* Adjust for fixed header */
+        text-align: center;
+        color: #000;
+        min-height: 100vh;
+      }
+
+      .trainer-card {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        margin: 20px;
+        max-width: 300px;
+      }
+
+      .trainer-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .trainer-card img {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+      }
+
+      .trainer-card h2 {
+        margin: 10px 0;
+        color: #333;
+      }
+
+      .trainer-card a {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #004d40;
+        color: #fff;
+        border-radius: 20px;
+        text-decoration: none;
+      }
+
+      .trainer-card a:hover {
+        background-color: #003d33;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <header class="custom-header">
+      <div class="logo flex items-center">
+        <img src="/static/images/logo.png" alt="Logo" class="w-24 h-24" />
+      </div>
+      <nav class="nav-links flex space-x-4">
+        <a href="index.html">Home</a>
+        <a href="plan.html">Diet Plan</a>
+        <a href="Analyze.html">Analyze</a>
+        <a href="trainers.html">Trainers</a>
+        <a href="BreathWork.html">BreathWork</a>
+        <a href="contactUs.html">Contact Us</a>
+      </nav>
+      {% if user_email %}
+      <p>Hello, {{ user_email }}!</p>
+      <a href="{{ url_for('logout') }}">
+        <button class="sign-in-btn">Logout</button>
+      </a>
+  {% else %}
+      <a href="{{ url_for('login_page') }}">
+          <button class="sign-in-btn">Sign in</button>
+      </a>
+  {% endif %}
+    </header>
+
+    <!-- Trainers Section -->
+    <div class="main-content">
+      <h1><b>Our Trainers</b></h1>
+      <div class="trainer-container">
+        <div class="trainer-card">
+          <a href="trainer-details/trainer1.html">
+            <img src="/static/images/Trainer1.jpg" alt="Trainer 1" />
+          </a>
+          <h2>Trainer 1</h2>
+          <p>Details about Trainer 1</p>
+          <a href="trainer-details/trainer1.html">View Profile</a>
+        </div>
+        <div class="trainer-card">
+          <a href="trainer-details/trainer2.html">
+            <img src="/static/images/davidkam.jpg" alt="Trainer 2" />
+          </a>
+          <h2>Trainer 2</h2>
+          <p>Details about Trainer 2</p>
+          <a href="trainer-details/trainer2.html">View Profile</a>
+        </div>
+        <div class="trainer-card">
+          <a href="trainer-details/trainer3.html">
+            <img src="/static/images/trainer3.jpg" alt="Trainer 3" />
+          </a>
+          <h2>Trainer 3</h2>
+          <p>Details about Trainer 2</p>
+          <a href="trainer-details/trainer3.html">View Profile</a>
+        </div>
+
+        <!-- Add more trainer cards as needed -->
+      </div>
+    </div>
+  </body>
+</html>

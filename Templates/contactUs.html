@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - Yoga Pose Correction And Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      .custom-header {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      }
+
+      .logo img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .custom-header .nav-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .custom-header a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        transition: color 0.3s;
+      }
+
+      .custom-header a:hover {
+        color: #b2dfdb;
+      }
+
+      .sign-in-btn {
+        background-color: #004d40;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        font-size: 1rem;
+        cursor: pointer;
+        border: none;
+        transition: background-color 0.3s;
+      }
+
+      .sign-in-btn:hover {
+        background-color: #003d33;
+      }
+
+      .contact-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 50px;
+        background-color: #fff;
+        max-width: 1200px;
+        margin: 100px auto 50px; /* Adjusted margin for navbar */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .contact-text {
+        flex: 1;
+        padding-right: 50px;
+      }
+
+      .contact-text h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+
+      .contact-text p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+      }
+
+      .contact-form {
+        flex: 1;
+        background-color: #fafafa;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .contact-form label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      .contact-form input,
+      .contact-form select,
+      .contact-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+
+      .contact-form textarea {
+        resize: vertical;
+        height: 100px;
+      }
+
+      .contact-form button {
+        width: 100%;
+        background-color: #333;
+        color: #fff;
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .contact-form button:hover {
+        background-color: #555;
+      }
+
+      footer {
+  background-color: #004d40;
+  color: #fff;
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-container {
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.footer-column {
+  flex: 1;
+  padding: 10px;
+}
+
+.footer-column h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #ffeb3b;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: #ffeb3b;
+}
+
+.social-icons {
+  margin-top: 20px;
+}
+
+.social-icons a {
+  color: #fff;
+  font-size: 1.5rem;
+  margin: 0 10px;
+  transition: transform 0.3s;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  color: #ffeb3b;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .circle-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .swiper-container {
+    height: 300px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-column {
+    padding: 0;
+    margin: 20px 0;
+  }
+}
+
+    </style>
+  </head>
+
+  <body>
+    <header class="custom-header">
+      <div class="logo flex items-center">
+        <img src="/static/images/logo.png" alt="Logo" class="w-24 h-24" />
+      </div>
+      <nav class="nav-links flex space-x-4">
+        <a href="index.html">Home</a>
+        <a href="plan.html">Diet Plan</a>
+        <a href="Analyze.html">Analyze</a>
+        <a href="trainers.html">Trainers</a>
+        <a href="BreathWork.html">BreathWork</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+      {% if user_email %}
+      <p>Hello, {{ user_email }}!</p>
+      <a href="{{ url_for('logout') }}">
+        <button class="sign-in-btn">Logout</button>
+      </a>
+  {% else %}
+      <a href="{{ url_for('login_page') }}">
+          <button class="sign-in-btn">Sign in</button>
+      </a>
+  {% endif %}
+    </header>
+
+    <div class="contact-container">
+      <div class="contact-text">
+        <h1>Talk with our sales team</h1>
+        <p>
+          Fill out your information and a representative will reach out to you.
+          Have a simple question? <a href="#">Check out our FAQ.</a>
+        </p>
+      </div>
+      <div class="contact-form">
+        <form action="/submit-contact-form" method="POST">
+          <label for="first-name">First Name *</label>
+          <input
+            type="text"
+            id="first-name"
+            name="first_name"
+            placeholder="e.g., John"
+            required
+          />
+
+          <label for="last-name">Last Name *</label>
+          <input
+            type="text"
+            id="last-name"
+            name="last_name"
+            placeholder="Smith"
+            required
+          />
+
+          <label for="email">Email *</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="name@gmail.com"
+            required
+          />
+
+          <label for="phone">Phone Number *</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="+91"
+            required
+          />
+
+          <label for="discussion">What would you like to discuss?</label>
+          <textarea
+            id="discussion"
+            name="discussion"
+            placeholder="Tell us about your team and provide some details about a project or process you would like to discuss."
+            required
+          ></textarea>
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul>
+            <li>Email: support@yogapose.com</li>
+            <li>Phone: +1-234-567-890</li>
+            <li>Location: 123 Yoga Street, Mindville</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <p>&copy; 2024 Yoga Pose Correction. All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>
